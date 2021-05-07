@@ -24,6 +24,6 @@ Run `ng build demo` to build the project. The build artifacts will be stored in 
 
 ## Running unit tests
 
-Run `ng test demo` to execute the unit tests via [Jest](https://jestjs.io).
-Run `nx affected:test` to execute the unit tests affected by a change.
-Run `npm run test:all` to run all unit tests in watch mode. They will re-run automatically as you make changes that affect the tests.
+- Run `ng test demo` to execute the unit tests via [Jest](https://jestjs.io).
+- Run `nx affected:test` to execute the unit tests affected by a change.
+- Run `npm run test:all` to run all unit tests in watch mode. They will re-run automatically as you make changes that affect the tests.
