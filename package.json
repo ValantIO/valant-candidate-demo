@@ -6,8 +6,12 @@
     "ng": "nx",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main",
     "nx": "nx",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "run-p start:client-app start:server-app",
+    "build": "npm run build:client-app && npm run build:server-app",
+    "build:client-app": "ng build",
+    "build:server-app": "cd ValantDemoApi/ValantDemoApi && dotnet build --configuration release",
+    "start:client-app": "ng serve",
+    "start:server-app": "cross-env ASPNETCORE_URLS=http://*:5000 ASPNETCORE_ENVIRONMENT=Development dotnet watch --project ValantDemoApi/ValantDemoApi run --no-launch-profile",
     "test": "ng test",
     "test:all": "nx run-many --all --target=test --colors --watch",
     "lint": "nx workspace-lint && ng lint",
@@ -26,7 +30,10 @@
     "update": "nx migrate latest",
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "generate-client:server-app": "start-server-and-test generate-client:server-app:serve http-get://localhost:5000/swagger/v1/swagger.json generate-client:server-app:generate",
+    "generate-client:server-app:serve": "cross-env ASPNETCORE_URLS=http://*:5000 ASPNETCORE_ENVIRONMENT=Development dotnet run --project ValantDemoApi/ValantDemoApi --no-launch-profile",
+    "generate-client:server-app:generate": "dotnet run --project ValantDemoApi/ApiClientGenerator http://localhost:5000/swagger/v1/swagger.json apps/demo/src/app/api-client/api-client.ts TypeScript"
   },
   "private": true,
   "dependencies": {
@@ -39,7 +46,9 @@
     "@angular/platform-browser-dynamic": "^11.2.0",
     "@angular/router": "^11.2.0",
     "@nrwl/angular": "12.1.1",
+    "cross-env": "^7.0.3",
     "rxjs": "~6.6.3",
+    "start-server-and-test": "^1.12.1",
     "tslib": "^2.0.0",
     "zone.js": "^0.10.2"
   },

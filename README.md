@@ -9,10 +9,13 @@ This project was generated using [Nx](https://nx.dev).
 ## Get started
 
 Run `npm install` to install the UI project dependencies. Grab a cup of coffee or your beverage of choice.
+You may also need to run `npm install start-server-and-test` and `npm install cross-env`
+
+As you build new controller endpoints you can auto generate the api http client code for angular using `npm run generate-client:server-app`
 
 ## Development server
 
-Run `ng serve demo` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+Run `npm run start` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 

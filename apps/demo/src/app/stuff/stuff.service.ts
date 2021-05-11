@@ -1,15 +1,14 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Stuff } from '../app.model';
+import { ValantDemoApiClient } from '../api-client/api-client';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StuffService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: ValantDemoApiClient.Client) {}
 
-  public getStuff(): Observable<Stuff[]> {
-    return this.httpClient.get<Stuff[]>('/api/stuff');
+  public getStuff(): Observable<string[]> {
+    return this.httpClient.maze();
   }
 }

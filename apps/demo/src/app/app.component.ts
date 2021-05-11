@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Stuff } from './app.model';
 import { LoggingService } from './logging/logging.service';
 import { StuffService } from './stuff/stuff.service';
 
@@ -10,7 +9,7 @@ import { StuffService } from './stuff/stuff.service';
 })
 export class AppComponent implements OnInit {
   public title = 'Valant demo';
-  public data: Stuff[];
+  public data: string[];
 
   constructor(private logger: LoggingService, private stuffService: StuffService) {}
 
@@ -21,7 +20,7 @@ export class AppComponent implements OnInit {
 
   private getStuff(): void {
     this.stuffService.getStuff().subscribe({
-      next: (response: Stuff[]) => {
+      next: (response: string[]) => {
         this.data = response;
       },
       error: (error) => {
