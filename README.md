@@ -8,7 +8,7 @@ This project was generated using [Nx](https://nx.dev).
 
 ## Get started
 
-Run `npm install` to install the UI project dependencies. Grab a cup of coffee or your beverage of choice.
+\*Run `npm install` to install the UI project dependencies. Grab a cup of coffee or your beverage of choice.
 You may also need to run `npm install start-server-and-test` and `npm install cross-env`
 
 As you build new controller endpoints you can auto generate the api http client code for angular using `npm run generate-client:server-app`
