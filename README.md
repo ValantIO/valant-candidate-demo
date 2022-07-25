@@ -2,9 +2,9 @@
 
 This project was generated using [Nx](https://nx.dev).
 
-[Nx Documentation](https://nx.dev/angular)
+[Nx Documentation](https://nx.dev/getting-started/nx-and-angular)
 
-[Interactive Tutorial](https://nx.dev/angular/tutorial/01-create-application)
+[Interactive Tutorial]([https://nx.dev/angular/tutorial/01-create-application](https://nx.dev/angular-tutorial/01-create-application))
 
 ## Get started
 
