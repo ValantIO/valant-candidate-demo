@@ -4,6 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using ValantDemoApi.Models;
+using ValantDemoApi.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ValantDemoApi
 {
@@ -21,10 +24,13 @@ namespace ValantDemoApi
     {
       services.AddCors();
       services.AddControllers();
+      services.AddDbContext<ValantDemoApiContext>(opt =>
+                                               opt.UseInMemoryDatabase("mazeDb"));
       services.AddSwaggerGen(c =>
       {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "ValantDemoApi", Version = "v1" });
       });
+      services.AddScoped<IMazeRepository, MazeRepository>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

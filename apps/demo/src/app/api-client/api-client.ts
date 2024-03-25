@@ -7,7 +7,7 @@
 //----------------------
 // ReSharper disable InconsistentNaming
 
-import { mergeMap as _observableMergeMap, catchError as _observableCatch } from 'rxjs/operators';
+import { mergeMap as _observableMergeMap, catchError as _observableCatch, map } from 'rxjs/operators';
 import { Observable, throwError as _observableThrow, of as _observableOf } from 'rxjs';
 import { Injectable, Inject, Optional, InjectionToken } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse, HttpResponseBase } from '@angular/common/http';
@@ -74,6 +74,19 @@ export class Client {
             }));
         }
         return _observableOf<string[]>(<any>null);
+    }
+
+    public mazeFormats(): Observable<any> {
+        return this.http
+        .get(this.baseUrl + "/Maze/Formats" )
+        .pipe(map((result: any) => result));
+    }
+    public addMaze(data: any): Observable<any>  {
+        
+        return this.http
+          .post(this.baseUrl + "/Maze", data)
+          .pipe(map((result: any) => result));
+    
     }
 }
 

@@ -1,0 +1,10 @@
+<canvas id="maze" ></canvas>
+<div *ngIf="endGame" style="margin-top: 25px;"><span>success!!</span></div>
+<div style="margin-top: 25px;">
+    <span class="btn-group">
+        <button (click)="move('ArrowLeft')" class="btn btn-primary ml-1" >&#8592;</button>
+        <button (click)="move('ArrowUp')" class="btn btn-primary ml-1" >&#8593;</button>
+        <button (click)="move('ArrowDown')" class="btn btn-primary ml-1" >&#8595;</button>
+        <button (click)="move('ArrowRight')" class="btn btn-primary ml-1" >&#8594;</button>
+    </span>
+</div>

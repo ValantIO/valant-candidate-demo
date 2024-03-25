@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using System.Collections.Generic;
+using ValantDemoApi.Models; 
 
 namespace ValantDemoApi.Tests
 {
@@ -28,6 +30,13 @@ namespace ValantDemoApi.Tests
           content.Should().Contain("Down");
           content.Should().Contain("Left");
           content.Should().Contain("Right");
+        }
+        public async Task ShouldReturnListOfMazeFormats()
+        {
+          var result = await this.client.GetAsync("/Maze/Formats");
+          result.EnsureSuccessStatusCode();
+          var content = JsonConvert.DeserializeObject<List<MazeFormatModel>>(await result.Content.ReadAsStringAsync());
+          content.Should().BeOfType<List<MazeFormatModel>>();
         }
     }
 }

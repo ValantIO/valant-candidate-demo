@@ -3,6 +3,17 @@
   <h1>Welcome to {{ title }}</h1>
 </header>
 <main>
-  <h2>Hi there</h2>
-  <p>Thanks for being you.</p>
+  <h2>Maze Navigator</h2>
+  <div style="text-align:center">
+    <div style="margin-bottom: 25px; margin-top: 25px;">
+      <valant-upload-file (onSelectMazeFormat)="saveMaze($event)"></valant-upload-file>
+    </div>
+    <div style="margin-bottom: 25px; margin-top: 25px;">
+      <label for="cars">Maze selector:</label>
+      <select [(ngModel)]="mazeFormat">
+        <option *ngFor="let c of mazeFormats" [ngValue]="c.value" >{{c.name}}</option>
+      </select>
+    </div>
+    <valant-maze [mazeFormat]="mazeFormat" ></valant-maze>
+  </div>
 </main>
