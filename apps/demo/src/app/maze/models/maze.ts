@@ -97,7 +97,6 @@ export class Maze {
     for (let i = 0; i < this.nRow; i++) {
       for (let j = 0; j < this.nCol; j++) {
         if (this.cells[i][j].type == 'S') {
-          debugger;
           return this.cells[i][j];
         }
       }
@@ -108,7 +107,6 @@ export class Maze {
     for (let i = 0; i < this.nRow; i++) {
       for (let j = 0; j < this.nCol; j++) {
         if (this.cells[i][j].type == 'E') {
-          debugger;
           return this.cells[i][j];
         }
       }

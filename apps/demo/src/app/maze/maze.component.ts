@@ -37,6 +37,8 @@ export class MazeComponent implements OnInit, AfterViewInit {
   fileName: string | undefined = undefined;
   jsonString: string = '';
   selectedMaze: MazeModel;
+
+  selectedId: number;
   listofMazes: MazeModel[] = [];
 
   constructor(public mazeService: ValantDemoApiClient.Client) {
@@ -47,6 +49,7 @@ export class MazeComponent implements OnInit, AfterViewInit {
     this.mazeMatrix = [];
     this.subscriptions = [];
     this.selectedMaze = {} as MazeModel;
+    this.selectedId = 0;
   }
 
   ngOnInit() {
@@ -78,28 +81,6 @@ export class MazeComponent implements OnInit, AfterViewInit {
 
   drawMaze() {
     this.busy = true;
-
-    // this.mazeMatrix = [
-    //   ['S', 'O', 'X', 'X'],
-    //   ['X', 'O', 'X', 'X'],
-    //   ['X', 'O', 'O', 'O'],
-    //   ['X', 'O', 'X', 'E'],
-    // ];
-
-    // this.mazeMatrix = [
-    //   ['S', 'O', 'X', 'O', 'O', 'O', 'X', 'X', 'X'],
-    //   ['X', 'O', 'X', 'O', 'X', 'X', 'X', 'X', 'X'],
-    //   ['X', 'O', 'X', 'O', 'O', 'O', 'O', 'O', 'O'],
-    //   ['X', 'O', 'X', 'O', 'X', 'O', 'X', 'O', 'X'],
-    //   ['X', 'O', 'O', 'O', 'X', 'O', 'X', 'O', 'X'],
-    //   ['X', 'O', 'X', 'O', 'X', 'X', 'X', 'O', 'X'],
-    //   ['X', 'O', 'X', 'O', 'X', 'O', 'X', 'O', 'X'],
-    //   ['X', 'O', 'X', 'O', 'X', 'O', 'X', 'O', 'E'],
-    // ];
-
-    //this.jsonString = JSON.stringify(this.mazeMatrix);
-
-    //this.mazeMatrix = this.createMazeFromResponse(this.jsonString);
 
     console.log('Drawing maze id' + this.selectedMaze.id);
     console.log('maze' + this.selectedMaze);
@@ -200,15 +181,6 @@ export class MazeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  undo(nSteps = 5) {
-    if (!this.gameOver && this.myPath.length > nSteps) {
-      this.drawPath(this.myPath, this.cellBackground);
-      this.myPath.splice(-nSteps);
-      this.drawPath(this.myPath);
-      this.currentCell = this.myPath[this.myPath.length - 1];
-    }
-  }
-
   drawSolution(color = this.solutionPathColor, lineThickness = this.solutionPathThickness) {
     this.gameOver = true;
     this.drawPath(this.maze.findPath(), color, lineThickness, true);
@@ -275,16 +247,12 @@ export class MazeComponent implements OnInit, AfterViewInit {
   private validateInputs() {
     if (isNaN(this.row) || this.row < 1) {
       alert('Please enter a positive number for #Rows.');
-      //this.row = this.defaultSize;
     }
     if (isNaN(this.col) || this.col < 1) {
       alert('Please enter a positive number for #Columns.');
-      //this.col = this.defaultSize;
     }
     if (this.row > 500 || this.col > 500) {
       alert('Size too large. You may crash the browser...');
-      //this.row = this.defaultSize;
-      //this.col = this.defaultSize;
     }
     this.row = ~~this.row;
     this.col = ~~this.col;
@@ -315,10 +283,7 @@ export class MazeComponent implements OnInit, AfterViewInit {
           }
         })
       );
-      // if (cellsHaveFourEdges.length) {
-      //   alert('dead loop');
-      //   break;
-      // }
+
       if (hasLoop) {
         alert('open loop');
         break;
@@ -375,5 +340,13 @@ export class MazeComponent implements OnInit, AfterViewInit {
 
     this.mazeMatrix = matrix;
     return matrix;
+  }
+
+  onChange(event) {
+    const val = event.target.value;
+
+    this.selectedMaze = this.listofMazes.find((x) => x.id == this.selectedId);
+
+    this.drawMaze();
   }
 }

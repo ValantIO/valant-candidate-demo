@@ -11,44 +11,34 @@
 
         <div>
             <p>
-                <select name="miselect" [(ngModel)]="selectedMaze">
-                    <option default>Upload a Maze</option>
-                    <option *ngFor="let maze of listofMazes" [ngValue]="maze">Maze {{maze.id}}
+                <select name="miselect" [(ngModel)]="selectedId" (change)="onChange($event)">
+                    <option selected [ngValue]="0">Upload a Maze</option>
+                    <option *ngFor="let maze of listofMazes" [ngValue]="maze.id">Maze {{maze.id}}
                     </option>
                 </select>
             </p>
-            Maze {{selectedMaze.id}}
-            Maze {{selectedMaze.content}}
-
         </div>
     </div>
+
     <div class="maze-form">
 
         <button type="button" (click)="drawMaze()" [disabled]="busy">
-            Show Maze
+            Restart
         </button>
 
-        <button type="button" (click)="onFileSelected($event)" [disabled]="busy">
-            Upload Maze
-        </button>
-
-                <button type="button" (click)="drawSolution()">Solution</button>
-                <!-- <button type="button" (click)="test()" *ngIf="showTestButton" [disabled]="busy">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            Test
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        </button> -->
+        <button type="button" (click)="drawSolution()">Show Solution</button>
+        </div>
+        <section>
+            <canvas id="maze"></canvas>
+        </section>
+        <section>
+            <div class="arrows">
+                <div><span (click)="move('Up')" title="move up">⬆️</span></div>
+                <div>
+                    <span (click)="move('Left')" title="move left">⬅️</span>
+                <span (click)="move('Right')" title="move right">➡️</span>
                 </div>
-                <section>
-                    <canvas id="maze"></canvas>
-                </section>
-                <section>
-                    <div class="arrows">
-                        <div><span (click)="move('Up')" title="move up">⬆️</span></div>
-                        <div>
-                            <span (click)="move('Left')" title="move left">⬅️</span>
-                            <span (click)="undo()" title="undo 5 steps">⏪</span>
-                            <span (click)="move('Right')" title="move right">➡️</span>
-                        </div>
-                        <div><span (click)="move('Down')" title="move down">⬇️</span></div>
-                    </div>
+                <div><span (click)="move('Down')" title="move down">⬇️</span></div>
+                </div>
                 </section>
                 </div>
