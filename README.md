@@ -65,6 +65,8 @@ Third.txt
 SOXXXXXXXX|OOOXXXXXXX|OXOOOXOOOO|XXXXOXOXXO|OOOOOOOXXO|OXXOXXXXXO|OOOOXXXXXE
 ```
 
+Example files are attached in the assets folder
+
 To consider
 - The pipe character in the text format is used as a line separator
 - The number of characters for each line must be the same
