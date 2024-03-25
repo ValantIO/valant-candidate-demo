@@ -1,1 +1,54 @@
-<p>maze works!</p>
+<div style="text-align: center;">
+    <div class="container">
+        <div>
+            <label for="fileUpload" class="file-upload">
+                <input type="file" accept=".txt" id="fileUpload" class="file-input" (change)="onFileSelected($event)" />
+                Upload File
+            </label>
+
+            <div *ngIf="!fileName" id="fileNameDisplay" class="file-upload">No upload file.</div>
+        </div>
+
+        <div>
+            <p>
+                <select name="miselect" [(ngModel)]="selectedMaze">
+                    <option default>Upload a Maze</option>
+                    <option *ngFor="let maze of listofMazes" [ngValue]="maze">Maze {{maze.id}}
+                    </option>
+                </select>
+            </p>
+            Maze {{selectedMaze.id}}
+            Maze {{selectedMaze.content}}
+
+        </div>
+    </div>
+    <div class="maze-form">
+
+        <button type="button" (click)="drawMaze()" [disabled]="busy">
+            Show Maze
+        </button>
+
+        <button type="button" (click)="onFileSelected($event)" [disabled]="busy">
+            Upload Maze
+        </button>
+
+                <button type="button" (click)="drawSolution()">Solution</button>
+                <!-- <button type="button" (click)="test()" *ngIf="showTestButton" [disabled]="busy">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            Test
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        </button> -->
+                </div>
+                <section>
+                    <canvas id="maze"></canvas>
+                </section>
+                <section>
+                    <div class="arrows">
+                        <div><span (click)="move('Up')" title="move up">⬆️</span></div>
+                        <div>
+                            <span (click)="move('Left')" title="move left">⬅️</span>
+                            <span (click)="undo()" title="undo 5 steps">⏪</span>
+                            <span (click)="move('Right')" title="move right">➡️</span>
+                        </div>
+                        <div><span (click)="move('Down')" title="move down">⬇️</span></div>
+                    </div>
+                </section>
+                </div>

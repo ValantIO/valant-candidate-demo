@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoggingService } from './logging/logging.service';
 import { StuffService } from './stuff/stuff.service';
+import { MazeModel } from './app.model';
 
 @Component({
   selector: 'valant-root',
@@ -9,7 +10,7 @@ import { StuffService } from './stuff/stuff.service';
 })
 export class AppComponent implements OnInit {
   public title = 'Valant demo';
-  public data: string[];
+  public data: MazeModel[];
 
   constructor(private logger: LoggingService, private stuffService: StuffService) {}
 
@@ -20,7 +21,7 @@ export class AppComponent implements OnInit {
 
   private getStuff(): void {
     this.stuffService.getStuff().subscribe({
-      next: (response: string[]) => {
+      next: (response: MazeModel[]) => {
         this.data = response;
       },
       error: (error) => {

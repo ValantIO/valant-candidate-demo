@@ -8,6 +8,7 @@ import { environment } from '../environments/environment';
 import { ValantDemoApiClient } from './api-client/api-client';
 import { MazeComponent } from './maze/maze.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 export function getBaseUrl(): string {
   return environment.baseUrl;
@@ -15,7 +16,7 @@ export function getBaseUrl(): string {
 
 @NgModule({
   declarations: [AppComponent, MazeComponent],
-  imports: [BrowserModule, HttpClientModule, 
+  imports: [BrowserModule, HttpClientModule, FormsModule,
     RouterModule.forRoot([    
     { path: 'maze', component: MazeComponent },
     { path: '**', redirectTo: '' },
