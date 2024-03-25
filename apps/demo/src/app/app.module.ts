@@ -6,14 +6,20 @@ import { LoggingService } from './logging/logging.service';
 import { StuffService } from './stuff/stuff.service';
 import { environment } from '../environments/environment';
 import { ValantDemoApiClient } from './api-client/api-client';
+import { MazeComponent } from './maze/maze.component';
+import { RouterModule } from '@angular/router';
 
 export function getBaseUrl(): string {
   return environment.baseUrl;
 }
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, HttpClientModule],
+  declarations: [AppComponent, MazeComponent],
+  imports: [BrowserModule, HttpClientModule, 
+    RouterModule.forRoot([    
+    { path: 'maze', component: MazeComponent },
+    { path: '**', redirectTo: '' },
+  ]),],
   providers: [
     LoggingService,
     StuffService,

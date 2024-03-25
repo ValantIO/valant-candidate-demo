@@ -40,3 +40,24 @@ h2 {
   font-size: 20px;
   margin: 40px 0 10px 0;
 }
+
+nav a {
+  display: inline-block;
+  color: #000;
+  background: #dbeccd;
+  padding: 0.5rem 1rem;
+  width: 7rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+nav a.active {
+  background-color: #396e7e;
+  color: white;
+  font-weight: 500;
+}
+
+nav a:hover:not(.active) {
+  background-color: #396efe;
+  color: white;
+}
