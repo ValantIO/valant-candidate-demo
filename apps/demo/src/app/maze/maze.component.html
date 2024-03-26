@@ -12,7 +12,7 @@
         <div>
             <p>
                 <select name="miselect" [(ngModel)]="selectedId" (change)="onChange($event)">
-                    <option selected [ngValue]="0">Upload a Maze</option>
+                    <option selected value="0">Upload a Maze</option>
                     <option *ngFor="let maze of listofMazes" [ngValue]="maze.id">Maze {{maze.id}}
                     </option>
                 </select>

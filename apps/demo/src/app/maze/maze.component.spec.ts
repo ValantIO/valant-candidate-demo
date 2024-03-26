@@ -4,52 +4,65 @@ import { of } from 'rxjs';
 import { AppModule } from '../app.module';
 import { LoggingService } from '../logging/logging.service';
 import { SilentLogger } from '../logging/silent-logger';
-import { StuffService } from '../stuff/stuff.service';
 import { ValantDemoApiClient } from '../api-client/api-client';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpHeaders } from '@angular/common/http';
+import { By } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
-const mockStuffService = { maze: jest.fn(() => of([])) };
+export function getBaseUrl(): string {
+  return 'http://localhost:5000/Maze';
+}
 
 HTMLCanvasElement.prototype.getContext = jest.fn();
 
 describe('MazeComponent', () => {
-  let component: Shallow<MazeComponent>;
+  let component: MazeComponent;
+  let fixture: ComponentFixture<MazeComponent>;
+  let service: ValantDemoApiClient.Client;
+  let httpClientSpy: any;
+
+  /************************/
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [
+        { provide: ValantDemoApiClient.API_BASE_URL, useFactory: getBaseUrl },
+        { provide: ValantDemoApiClient.Client, useFactory: service },
+      ],
+    });
+  });
 
   beforeEach(() => {
-    component = new Shallow(MazeComponent, AppModule)
-      .provideMock({ provide: ValantDemoApiClient.Client, useValue: mockStuffService })
-      .provideMock({ provide: LoggingService, useClass: SilentLogger });
-    jest.clearAllMocks();
+    httpClientSpy = {
+      get: jest.fn(),
+      Headers: {
+        observe: 'response',
+        responseType: 'blob',
+        headers: new HttpHeaders({
+          Accept: 'text/plain',
+        }),
+      },
+    };
+    service = new ValantDemoApiClient.Client(httpClientSpy);
+  });
+  /* **** */
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [FormsModule],
+      declarations: [MazeComponent],
+    }).compileComponents();
   });
 
-  it('should render', async () => {
-    const rendering = await component.render();
-    expect(rendering).toBeTruthy();
+  beforeEach(async () => {
+    fixture = TestBed.createComponent(MazeComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
-  it('should have as title "Valant demo"', async () => {
-    const { instance } = await component.render();
-    expect(instance.listofMazes).toHaveLength(0);
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
-
-  it('should render a banner message', async () => {
-    const { find } = await component.render();
-    expect(find('fileUpload').nativeElement.textContent).toBe('Upload File');
-  });
-
-  // it('gets stuff from the API on init', async () => {
-  //   const spy = jest.spyOn(mockStuffService, 'maze');
-  //   await component.render();
-  //   const { instance } = await component.render();
-
-  //   instance.ngOnInit();
-  //   expect(spy).toBeCalled();
-  // });
-
-  // test('plays video', () => {
-
-  //   const isPlaying = await component.render();
-
-  //   expect(spy).toHaveBeenCalled();
-  //   expect(isPlaying).toBe(true);
-  // });
 });

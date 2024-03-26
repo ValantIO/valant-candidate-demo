@@ -43,7 +43,7 @@ export module ValantDemoApiClient {
       };
 
       return this.http
-        .request('get', url_, options_)
+        .get(url_, options_)
         .pipe(
           _observableMergeMap((response_: any) => {
             return this.processMaze(response_);
@@ -87,26 +87,7 @@ export module ValantDemoApiClient {
             }
           } else return <Observable<string>>(<any>_observableThrow(response_));
         })
-      );
-
-      // return this.http
-      //   .request('post', url_, options_)
-      //   .pipe(
-      //     _observableMergeMap((response_: any) => {
-      //       return this.processMaze(response_);
-      //     })
-      //   )
-      //   .pipe(
-      //     _observableCatch((response_: any) => {
-      //       if (response_ instanceof HttpResponseBase) {
-      //         try {
-      //           return this.processMaze(<any>response_);
-      //         } catch (e) {
-      //           return <Observable<string[]>>(<any>_observableThrow(e));
-      //         }
-      //       } else return <Observable<string[]>>(<any>_observableThrow(response_));
-      //     })
-      //   );
+      );      
     }
 
     protected processMaze(response: HttpResponseBase): Observable<MazeModel[]> {

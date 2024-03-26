@@ -82,7 +82,7 @@ export class MazeComponent implements OnInit, AfterViewInit {
   drawMaze() {
     this.busy = true;
 
-    console.log('Drawing maze id' + this.selectedMaze.id);
+    console.log('Drawing maze id' + this.selectedMaze?.id);
     console.log('maze' + this.selectedMaze);
 
     this.mazeMatrix = this.createMazeFromResponse(this.selectedMaze.content);
