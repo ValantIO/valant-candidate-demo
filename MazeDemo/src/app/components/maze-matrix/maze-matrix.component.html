@@ -1,0 +1,15 @@
+<div *ngIf="hasMaze; else noMaze">
+    <div>
+        <div *ngFor="let row of mazeContent; let i =  index">
+            <span class="maze-block" *ngFor="let col of row; let j = index" [class.active]="getActive(j,i)">
+                {{  col }}
+            </span>
+        </div>
+    </div>
+    
+    <button (click)="print('LEFT')">LEFT</button>
+    <button (click)="print('DOWN')">DOWN</button>
+    <button (click)="print('UP')">UP</button>
+    <button (click)="print('RIGHT')">RIGHT</button>
+</div>
+<ng-template #noMaze>No Maze Selected</ng-template>
