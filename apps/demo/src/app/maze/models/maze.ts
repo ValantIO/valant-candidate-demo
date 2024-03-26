@@ -1,7 +1,7 @@
 import { Cell } from './cell';
 
 /**
- * A rectangle maze generated based on "hunt-and-kill" algorithm.
+ * A rectangle maze generated based on file template.
  */
 export class Maze {
   public readonly cells: Cell[][] = [];
@@ -33,14 +33,6 @@ export class Maze {
         this.cells[i][j] = this.updateCell(this.cells[i][j], i, j);
       }
     }
-
-    console.log('this.cells');
-    console.log(this.cells);
-
-    // generate maze
-    // this.randomRowNumbers = Utils.shuffleArray([...Array(this.nRow).keys()]);
-    // this.randomColNumbers = Utils.shuffleArray([...Array(this.nCol).keys()]);
-    // this.huntAndKill();
   }
 
   private updateCell(cell: Cell, i: number, j: number): Cell {
@@ -145,38 +137,6 @@ export class Maze {
     return path.reverse();
   }
 
-  private huntAndKill() {
-    let current = this.randomCell; // hunt-and-kill starts from a random Cell
-    while (current) {
-      this.kill(current);
-      current = this.hunt();
-    }
-  }
-  private kill(current: Cell) {
-    while (current) {
-      const next = current.neighbors.find((c) => !c.visited);
-      if (next) {
-        current.connectTo(next);
-      }
-      current = next;
-    }
-  }
-  private hunt(): Cell {
-    for (let huntRow of this.randomRowNumbers) {
-      for (let huntColumn of this.randomColNumbers) {
-        const cell = this.cells[huntRow][huntColumn];
-        if (cell.visited) {
-          continue;
-        }
-        const next = cell.neighbors.find((c) => c.visited);
-        if (next) {
-          cell.connectTo(next);
-          return cell;
-        }
-      }
-    }
-  }
-
   private mapNeighbors(cell: Cell): void {
     if (cell.row - 1 >= 0) {
       cell.neighbors.push(this.cells[cell.row - 1][cell.col]);
@@ -190,7 +150,6 @@ export class Maze {
     if (cell.col + 1 < this.nCol) {
       cell.neighbors.push(this.cells[cell.row][cell.col + 1]);
     }
-    //cell.neighbors = Utils.shuffleArray(cell.neighbors);
   }
 }
 

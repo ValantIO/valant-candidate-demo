@@ -258,42 +258,6 @@ export class MazeComponent implements OnInit, AfterViewInit {
     this.col = ~~this.col;
   }
 
-  test() {
-    this.busy = true;
-    const cellsHaveFourEdges: Cell[] = [];
-    let hasLoop = false;
-    const size = 50;
-    for (let i = 0; i < 100; i++) {
-      const maze = new Maze(this.mazeMatrix.length, this.mazeMatrix[0].length, this.mazeMatrix);
-      maze.cells.forEach((row) =>
-        row.forEach((c) => {
-          if (c.nEdges === 4) {
-            cellsHaveFourEdges.push(c);
-          }
-          if (c.col < size - 1 && c.row < size - 1) {
-            if (!c.eastEdge && !c.southEdge) {
-              const cellOnTheRight = maze.cells[c.row][c.col + 1];
-              if (!cellOnTheRight.southEdge) {
-                const cellBelow = maze.cells[c.row + 1][c.col];
-                if (!cellBelow.eastEdge) {
-                  hasLoop = true;
-                }
-              }
-            }
-          }
-        })
-      );
-
-      if (hasLoop) {
-        alert('open loop');
-        break;
-      }
-    }
-
-    console.log(`testing has finished`);
-    this.busy = false;
-  }
-
   ngOnDestroy(): void {
     this.subscriptions.forEach((s) => s.unsubscribe());
 

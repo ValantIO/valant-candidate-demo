@@ -1,8 +1,7 @@
-import { TestBed, getTestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { ValantDemoApiClient } from './api-client';
 import { of } from 'rxjs';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { first } from 'rxjs/operators';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpHeaders } from '@angular/common/http';
 
 export function getBaseUrl(): string {
