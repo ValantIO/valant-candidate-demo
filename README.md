@@ -1,32 +1,11 @@
-# Valant
+# MazeChallenge
+Code Challenge
 
-This project was generated using [Nx](https://nx.dev).
-
-[Nx Documentation](https://nx.dev/getting-started/nx-and-angular)
-
-[Interactive Tutorial](https://nx.dev/angular-tutorial/01-create-application)
-
-## Get started
-
-Run `npm install` to install the UI project dependencies. Grab a cup of coffee or your beverage of choice.
-You may also need to run `npm install start-server-and-test` and `npm install cross-env`
-
-As you build new controller endpoints you can auto generate the api http client code for angular using `npm run generate-client:server-app`
-
-## Development server
-
-Run `npm run start` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng g component my-component --project=demo` to generate a new component.
-
-## Build
-
-Run `ng build demo` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-- Run `ng test demo` to execute the unit tests via [Jest](https://jestjs.io).
-- Run `nx affected:test` to execute the unit tests affected by a change.
-- Run `npm run test:all` to run all unit tests in watch mode. They will re-run automatically as you make changes that affect the tests.
+Steps to configure the Project:
+1. Create a database called MazeDB and create a table Maze. The script is provided in the root of this repository "MazeDB.sql".
+2. In the file MazeAPI/MazeAPI/appsettings.json open it, and in the connection string section modify the MazeConnection and change the server to your server name server="YourServerName"
+   "MazeConnection": "server=DESKTOP-SERVER-NAME; database=MazeDB; trusted_connection=true; TrustServerCertificate=true"
+3. Once the api is compiled and running verify the localhost port in case is different please change it on this root of the client project: MazeDemo\src\app\external\maze-api.ts
+   currently it has the value "http://localhost:5084".
+4. Once both projects are running first y you need to upload a file you can use the one that is in the root of this repository: SampleMazeFormat.txt
+5. after that this maze is uploaded and saved into the database so a combobox is displayed to select any other maze in case there are more availables in the database.
