@@ -18,6 +18,10 @@ export class AppComponent implements OnInit {
     this.getStuff();
   }
 
+  public helloWorld(): void {
+    alert('Hi');
+  }
+
   private getStuff(): void {
     this.stuffService.getStuff().subscribe({
       next: (response: string[]) => {
